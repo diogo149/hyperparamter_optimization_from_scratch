@@ -1,0 +1,59 @@
+* what?
+- just some code for playing with hyperparameter optimization algorithms
+* assumptions
+- the search space of hyperparameters is random uniform between 0 and 1
+* dependencies
+- numpy
+- scipy
+- scikit-learn
+- matplotlib
+- pandas
+- seaborn
+- hyperopt
+- pymongo
+- networkx
+- ipython[notebook]
+* interesting questions
+- explore / exploit
+  - minimize loss
+  - maximize variance
+  - maximize EI
+    - P(lambda | c)
+    - p(c | lambda)
+- what value to optimize
+  - loss / log(loss) / loss ** 2 etc.
+  - min(loss)
+- how to deal with noise?
+  - "data augmentation"
+- what model
+  - RF, TPE, GP, NN, extra trees, ensemble of x (for some x), nn w/ dropout
+  - generative model
+  - baselines: grid, random, hyperopt
+- how to deal with very pointy data
+- using a generative model instead of random search
+- how to deal with errors in the search space?
+  - if it's stochastic (wrt hyperparams)?
+  - if it's deterministic (wrt hyperparams)?
+  - options
+    - create a model to explicitly find errors (binary)
+* TODOs
+- more evaluation functions
+  - ML model on dataset
+    - iris
+    - mnist
+  - setting params of linear model
+- using ml algorithms
+- hyperopt baseline
+- generative models
+  - http://scikit-learn.org/stable/modules/generated/sklearn.mixture.GMM.html
+  - http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KernelDensity.html
+  - http://scikit-learn.org/stable/modules/generated/sklearn.mixture.DPGMM.html
+  - http://scikit-learn.org/stable/modules/generated/sklearn.mixture.VBGMM.html
+- add in noisy=False parameter to evaluation algorithms
+
+
+from sklearn.neighbors.kde import KernelDensity
+import numpy as np
+X = np.array([[-1, -1], [-2, -1], [-3, -2], [1, 1], [2, 1], [3, 2]])
+kde = KernelDensity(kernel='gaussian', bandwidth=0.2).fit(X)
+kde.score_samples(X)
